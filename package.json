@@ -12,7 +12,7 @@
     "test:integration_tests": "NODE_ENV=test PORT=3001 jest --testPathPattern=/tests/integration",
     "test:integration": "start-server-and-test test:serve http://localhost:3001 test:integration_tests",
     "test:e2e_tests": "cypress run",
-    "test:e2e": "start-server-and-test test:serve http://localhost:3001 test:cypress"
+    "test:e2e": "start-server-and-test test:serve http://localhost:3001 test:e2e_tests"
   },
   "jest": {
     "testPathIgnorePatterns": [
