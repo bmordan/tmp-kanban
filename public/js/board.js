@@ -23,7 +23,7 @@ const viewUserPill = user => `
 const viewTask = task => `
     <article id="${task.id}" class="task" draggable="true" ondragstart="app.run('ondragstart', event);">
         <p>${task.desc}</p>
-        ${viewUserPill(task.user)}
+        ${viewUserPill(task.User)}
     </article>
 `
 
@@ -74,17 +74,16 @@ const update = {
     addTask: async (state, form) => {
         const data = new FormData(form)
         const desc = data.get('desc')
-        const userId = data.get('user')
+        const UserId = data.get('user')
         const task = await fetch(`/boards/${state.board.id}/tasks`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({desc, userId})
+            body: JSON.stringify({desc, UserId})
         })
         .then(res => res.json())
         state.tasks.push(task)
-        console.log(state.tasks)
         state.modal = false
         return state
     }

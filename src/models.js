@@ -25,10 +25,10 @@ Task.init({
     desc: DataTypes.STRING,
     status: DataTypes.NUMBER
 }, {sequelize})
-Board.hasMany(Task, {as: 'tasks'})
+Board.hasMany(Task)
 Task.belongsTo(Board)
+Task.belongsTo(User)
 User.hasMany(Task)
-Task.belongsTo(User, {as: 'user'})
 
 module.exports = {
     Board,

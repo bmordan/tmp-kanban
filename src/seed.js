@@ -1,5 +1,5 @@
 const {User, Board, Task, sequelize} = require('./models')
-sequelize.sync().then(async () => {
+async function seed() {
     const alan = await User.create({
         name: "Alan",
         avatar: "/avatars/alan.jpg"
@@ -12,7 +12,11 @@ sequelize.sync().then(async () => {
         name: "Vikki",
         avatar: "/avatars/vikki.jpg"
     })
-    const users = [alan, karan, vikki]
+    const jess = await User.create({
+        name: "Jess",
+        avatar: "https://www.premadegraphics.com/img_1/23/Female-Avatar-2.png"
+    })
+    const users = [alan, karan, vikki, jess]
     const projectZeus = await Board.create({title: "Project Zeus"})
     const projectQuarter = await Board.create({title: "Fourth Quarter"})
     const projectZeusTasks = [
@@ -84,25 +88,10 @@ sequelize.sync().then(async () => {
         }
     ]
     await Promise.all(projectZeusTasks.map(_task => {
-        return Task.create(_task)
-            .then(async task => {
-                await users[Math.floor(Math.random() * 3)].addTask(task)
-                return projectZeus.addTask(task)
-                return task.addUser()
-            })
-            .catch(err => {
-                console.error(err)
-            })
+        return Task.create({..._task, BoardId: projectZeus.id, UserId: users[Math.floor(Math.random() * 4)].id})
     }))
     await Promise.all(projectQuarterTasks.map(_task => {
-        return Task.create(_task)
-            .then(async task => {
-                await users[Math.floor(Math.random() * 3)].addTask(task)
-                return projectQuarter.addTask(task)
-                return task.addUser()
-            })
-            .catch(err => {
-                console.error(err)
-            })
+        return Task.create({..._task, BoardId: projectQuarter.id, UserId: users[Math.floor(Math.random() * 4)].id})
     }))
-})
+}
+module.exports = seed

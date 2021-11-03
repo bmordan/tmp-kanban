@@ -7,11 +7,16 @@
     "start": "node server.js",
     "dev": "NODE_ENV=dev PORT=3000 nodemon server.js",
     "test": "PORT=3001 jest --watchAll",
-    "test:unit": "PORT=3001 jest",
+    "test:serve": "NODE_ENV=test PORT=3001 node server.js",
+    "test:unit": "PORT=3001 jest --testPathPattern=/tests/unit",
+    "test:integration_tests": "NODE_ENV=test PORT=3001 jest --testPathPattern=/tests/integration",
+    "test:integration": "start-server-and-test test:serve http://localhost:3001 test:integration_tests",
     "test:cypress": "PORT=3001 cypress open"
   },
   "jest": {
-    "testPathIgnorePatterns": ["spec"]
+    "testPathIgnorePatterns": [
+      "spec"
+    ]
   },
   "engines": {
     "node": "14",
@@ -21,6 +26,7 @@
   "license": "ISC",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.3",
+    "axios": "^0.24.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "handlebars": "^4.5.3",
@@ -33,6 +39,7 @@
     "jest": "^26.4.2",
     "mocha": "^8.2.0",
     "nodemon": "^2.0.4",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "start-server-and-test": "^1.14.0"
   }
 }
