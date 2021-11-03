@@ -1,0 +1,38 @@
+{
+  "name": "swe-orm-restaurants",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=dev PORT=3000 nodemon server.js",
+    "test": "PORT=3001 jest --watchAll",
+    "test:unit": "PORT=3001 jest",
+    "test:cypress": "PORT=3001 cypress open"
+  },
+  "jest": {
+    "testPathIgnorePatterns": ["spec"]
+  },
+  "engines": {
+    "node": "14",
+    "npm": "6"
+  },
+  "author": "bmordan",
+  "license": "ISC",
+  "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "handlebars": "^4.5.3",
+    "pg": "^8.4.1",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "cypress": "^5.4.0",
+    "jest": "^26.4.2",
+    "mocha": "^8.2.0",
+    "nodemon": "^2.0.4",
+    "sqlite3": "^5.0.0"
+  }
+}
