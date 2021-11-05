@@ -4,7 +4,16 @@ const path = require('path')
 const connectionSettings = {
     test: {dialect: 'sqlite', storage: 'sqlite::memory:'},
     dev: {dialect: 'sqlite', storage: path.join(__dirname, 'data.db')},
-    production: {dialect: 'postgres', protocol: 'postgres'}
+    production: {
+        dialect: 'postgres',
+        ssl: true,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
+    }
 }
 
 const sequelize = process.env.NODE_ENV === 'production'
